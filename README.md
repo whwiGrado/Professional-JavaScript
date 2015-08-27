@@ -277,8 +277,15 @@
 
 ```
   document.getElementById('id') 参数 id 区分大小写，如果 id 为空，则返回 null
-  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰 id 参数的匹配
+  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰其他元素 id   匹配
+  所以不要让表单元素的 name 属性名与其他元素的 id 属性名相同
 
+  document.getElementsByTagName('tagName') 参数 tagName 区分大小写，返回一个 HTMLCollection 对象，也是动态集合，与 NodeList 很像
+  HTMLCollection 对象的访问方法有三种：[index] && .item(index) && namedItem('name')
+    var firstItem = getElementsByTagName('body')[0];
+    var secondItem = getElementsByTagName('body').item(1);
+    var img = getElementsByTagName('img').namedItem('myLogo');
+  document.getElementsByTagName('*') 返回
 
 ```
 * document.adoptNode()
