@@ -142,12 +142,12 @@
           <li>b</li>
           <li>c</li>
         </ul>
-      JS:
-        var myList = document.getElementById('list');
-        var deepList = myList.cloneNode(true);
-        console.log(deepList.childNodes.length); // 3 (IE<9) 或 7 (其他浏览器)
-      var shallowList = myList.cloneNode(false);
-        console.log(shallowList.childNodes.length); // 0
+    JS:
+      var myList = document.getElementById('list');
+      var deepList = myList.cloneNode(true);
+      console.log(deepList.childNodes.length); // 3 (IE<9) 或 7 (其他浏览器)
+    var shallowList = myList.cloneNode(false);
+      console.log(shallowList.childNodes.length); // 0
 ```
 
 * Node.normalize()
@@ -270,24 +270,53 @@
 
 #### Document.Methods
 * document.getElementById()
-* document.getElementsByClassName()
-* document.getElementsByName()
-* document.getElementsByTagName()
-* document.getElementsByTagNameNS()
 
 ```
-  document.getElementById('id') 参数 id 区分大小写，如果 id 为空，则返回 null
-  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰其他元素 id   匹配
-  所以不要让表单元素的 name 属性名与其他元素的 id 属性名相同
+  document.getElementById('id') 参数 id 区分大小写
+  返回某个元素，例如[object HTMLInputElement]，如果 id 为空，则返回 null
+  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰其他元素 id 匹配，所以不要让表单元素的 name 属性名与其他元素的 id 属性名相同
+```
+* document.getElementsByTagName()
 
-  document.getElementsByTagName('tagName') 参数 tagName 区分大小写，返回一个 HTMLCollection 对象，也是动态集合，与 NodeList 很像
+```
+  document.getElementsByTagName('tagName') 参数 tagName 不区分大小写
+  返回一个 [object HTMLCollection] 对象，也是动态集合，与 NodeList 很像
   HTMLCollection 对象的访问方法有三种：[index] && .item(index) && namedItem('name')
     var firstItem = getElementsByTagName('body')[0];
     var secondItem = getElementsByTagName('body').item(1);
     var img = getElementsByTagName('img').namedItem('myLogo');
-  document.getElementsByTagName('*') 返回
+  document.getElementsByTagName('*') 返回返回整个页面中的所有元素
+```
+* document.getElementsByName()
 
 ```
+  document 特有的方法，返回一个 [object NodeList] 对象
+  最常用的场景就是用 document.getElementsByName() 方法取得单选按钮
+    HTML:
+      <fieldset>
+        <legend>Which color do you prefer?</legend>
+        <ul>
+          <li>
+            <input type="radio" value="red" name="color" id="colorRed">
+            <label for="colorRed">Red</label>
+          </li>
+          <li>
+            <input type="radio" value="green" name="color" id="colorGreen">
+            <label for="colorGreen">Green</label>
+          </li>
+          <li>
+            <input type="radio" value="blue" name="color" id="colorBlue">
+            <label for="colorBlue">Blue</label>
+          </li>
+        </ul>
+      </fieldset>
+    JS:
+      var radios = document.getElementsByName('color');
+```
+* document.getElementsByClassName()
+* document.getElementsByTagNameNS()
+
+
 * document.adoptNode()
 * document.close()
 * document.createAttribute()
