@@ -146,7 +146,7 @@
       var myList = document.getElementById('list');
       var deepList = myList.cloneNode(true);
       console.log(deepList.childNodes.length); // 3 (IE<9) 或 7 (其他浏览器)
-    var shallowList = myList.cloneNode(false);
+      var shallowList = myList.cloneNode(false);
       console.log(shallowList.childNodes.length); // 0
 ```
 
@@ -274,7 +274,8 @@
 ```
   document.getElementById('id') 参数 id 区分大小写
   返回某个元素，例如[object HTMLInputElement]，如果 id 为空，则返回 null
-  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰其他元素 id 匹配，所以不要让表单元素的 name 属性名与其他元素的 id 属性名相同
+  表单元素<input>、<textarea>、<button>、<select>的 name 属性在 <IE7 时会干扰其他元素 id 匹配，
+  所以不要让表单元素的 name 属性名与其他元素的 id 属性名相同
 ```
 * document.getElementsByTagName()
 
@@ -290,7 +291,8 @@
 * document.getElementsByName()
 
 ```
-  document 特有的方法，返回一个 [object NodeList] 对象
+  document 特有的方法
+  返回一个 [object NodeList] 对象
   最常用的场景就是用 document.getElementsByName() 方法取得单选按钮
     HTML:
       <fieldset>
@@ -316,14 +318,15 @@
 * document.getElementsByClassName()
 * document.getElementsByTagNameNS()
 
-
+###### 不常用的
+* document.createElement()
+* document.createComment()
+* document.createTextNode()
 * document.adoptNode()
 * document.close()
 * document.createAttribute()
 * document.createCDATASection()
-* document.createComment()
 * document.createDocumentFragment()
-* document.createElement()
 * document.createElementNS()
 * document.createEvent()
 * document.createExpression()
@@ -331,14 +334,12 @@
 * document.createNodeIterator()
 * document.createProcessingInstruction()
 * document.createRange()
-* document.createTextNode()
 * document.createTouch()
 * document.createTouchList()
 * document.createTreeWalker()
 * document.enableStyleSheetsForSet
 * document.evaluate()
 * document.execCommand()
-
 * document.getSelection()
 * document.hasFocus
 * document.importNode
@@ -349,3 +350,14 @@
 * document.registerElement()
 * document.write
 * document.writeln
+
+### Element 类型
+```
+  Element 继承自 Node 类型的属性：
+    Element.nodeType // 1
+    Element.nodeName // 元素标签名（大写），与 Element.tagName 返回值相同
+    Element.nodeValue // null
+    Element.parentNode // Document 或 Element
+    Element.ownerDocument // Document
+    Element.childNodes // Element、Text、Comment
+```
