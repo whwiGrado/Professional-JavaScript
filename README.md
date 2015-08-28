@@ -287,10 +287,16 @@
 * document.getElementsByClassName()
 * document.getElementsByTagNameNS()
 
-###### 不常用的
 * document.createElement()
-* document.createComment()
 * document.createTextNode()
+* document.createComment()
+
+```
+  上述三个方法分别
+    document.createElement() 创建新的元素
+    document.createTextNode() 创建新的文本节点
+    document.createComment() 创建新的注释节点
+```
 
 ### Element 类型
 ```
@@ -302,7 +308,7 @@
     Element.ownerDocument // Document
     Element.childNodes // Element、Text、Comment
 ```
-* 常用元素的类型：
+#### 常用元素的类型：
 
     元素 | 类型
     ------------ | ------------- |
@@ -331,7 +337,39 @@
     TEXTAREA| HTMLTextAreaElement  |
     SCRIPT| HTMLScriptElement  |
 
-Element.getAttribute("attrName")
+#### Element.Properties
+* Element.attributes
+
+```
+  返回一个 NamedNodeMap 与 NodeList 类似，也是一个动态集合
+  用 Element.attributes 可以遍历元素的属性
+    function ouputAttributes(element) {
+      var output = [], attrName, attrValue, i, len;
+
+      if (element.hasAttributes()) {
+        for (i=0, len=element.attributes.length; i<len; i++) {
+          attrName = element.attributes[i].nodeName;
+          attrValue = element.attributes[i].nodeValue;
+          if (element.attributes[i].specified) { // IE<7
+            output.push(attrName + '="' + attrValue + '"');
+          }
+        }
+      }
+
+      return output.join(" ");
+    }
+```
+
+#### Element.Methods
+* Element.getElementsByClassName()
+* Element.getElementsByTagName()
+
+```
+  Element 类型也支持 getElementsByClassName()、getElementsByTagName() 两个方法
+    var ul = document.getElementById('myList');
+    var items = ul.getElementsByTagName('li');
+```
+* Element.getAttribute("attrName")
 
 ```
   参数 attrName 不区分大小写
@@ -340,7 +378,8 @@ Element.getAttribute("attrName")
   Element.getAttribute("onClick") 返回的是 onClick 属性值中包含的 js 文本
   Element.onClick 返回的是一个函数
     HTML:
-      <button style="background: lightgreen; color: #fff;" onclick="alert('run');">click me</button>
+      <button style="background:lightgreen; color:#fff;"
+      onclick="alert('run');">click me</button>
     JS:
       var btn = document.getElementsByTagName('button')[0];
       console.log(btn.style); // [object CSSStyleDeclaration] 对象
@@ -348,39 +387,162 @@ Element.getAttribute("attrName")
       console.log(btn.onclick); // function onclick(event) {alert('run');}
       console.log(btn.getAttribute('onclick')); // "alert('run');"
 ```
-Element.setAttribute("attrName", "value")
+* Element.setAttribute("attrName", "value")
 
 ```
   如果属性 attrName 已经存在，则设置为新值
   如果属性 attrName 不存在，则创建属性并设值
   通过 setAttribute() 方法设置的属性，其属性名均会被转换为"小写形式"
 ```
-Element.removeAttribute("attrName")
+
+* Element.hasAttribute("attrName")
+* Element.hasAttributes()
+* Element.removeAttribute("attrName")
+
+### Text 类型
+```
+  Text 继承自 Node 类型的属性：
+    Text.nodeType // 3
+    Text.nodeName // "#text"
+    Text.nodeValue // content of the text node ，与 Text.data 返回值相同
+    Text.parentNode // Element
+    Text.ownerDocument // Document
+    Text.childNodes // 没有子节点
+```
+#### Text.Properties
+* Text.nodeValue.length
+* Text.data.length
+
+```
+  Text.nodeValue.length === Text.data.length
+    <!-- 没有内容，也就没有文本节点 -->
+    <div></div>
+
+    <!-- 有空格，因而有一个文本节点 -->
+    <div> </div>
+    或
+    <div>
+    </div>
+
+    <!-- 有内容，因而有一个文本节点 -->
+    <div>hello world!</div>
+```
+
+#### Text.Methods
+* Text.splitText(offset)
+
+```
+  Text 类型提供了一个作用于 normalize() 相反的方法 Text.splitText(offset)
+  将一个文本节点拆分为两个文本节点，原节点保存(0,offset)的内容，新节点保存[offset,末尾)的内容
+  返回该新节点
+    var element = document.createElement('div');
+    var textNode = document.createTextNode('hello world!');
+    element.appendChild(textNode);
+    document.body.appendChild(element);
+
+    console.log(element.childNodes.length); // 1
+
+    var newNode = element.firstChild.splitText(5);
+
+    console.log(element.childNodes.length); // 2
+    console.log(element.childNodes[0].nodeValue); // "hello"
+    console.log(newNode === element.childNodes[1]); // true
+    console.log(element.childNodes[1].nodeValue); // " world!"
+```
+
+### Comment 类型
+```
+  Comment 继承自 Node 类型的属性：
+    Comment.nodeType // 8
+    Comment.nodeName // "#comment"
+    Comment.nodeValue // content of the comment ，与 Comment.data 返回值相同
+    Comment.parentNode // Document 或 Element
+    Comment.ownerDocument // Document
+    Comment.childNodes // 没有子节点
+```
+
+### DocumentFragment 类型
+```
+  DocumentFragment 继承自 Node 类型的属性：
+    DocumentFragment.nodeType // 11
+    DocumentFragment.nodeName // "#document-fragment"
+    DocumentFragment.nodeValue // null
+    DocumentFragment.parentNode // null
+    DocumentFragment.ownerDocument // Document
+    DocumentFragment.childNodes // Element、Text、Comment
+```
+#### DocumentFragment 文档片段的作用
+
+```
+  给一个 ul 添加3个 li ，如果逐个添加到文档中，会导致浏览器反复渲染
+  可以使用文档片段来保存这3个 li ，再一次性添加到文档中
+    var fragment = document.createDocumentFragment();
+    var ul = document.getElementById('myList');
+    var li = null;
+
+    for (i=0; i<3; i++) {
+      li = document.createElement('li');
+      li.appendChild(document.createTextNode("Item" + (i+1)));
+      fragment.appendChild(li);
+    }
+    ul.appendChild(fragment);
+```
 
 
-Element.closest()
-Element.getAttributeNode()
-Element.getAttributeNodeNS()
-Element.getAttributeNS()
-Element.getBoundingClientRect()
-Element.getClientRects()
-Element.getElementsByClassName()
-Element.getElementsByTagName()
-Element.getElementsByTagNameNS()
-Element.hasAttribute()
-Element.hasAttributeNS()
-Element.hasAttributes()
-Element.insertAdjacentHTML()
-Element.matches()
-Element.querySelector()
-Element.querySelectorAll()
-ChildNode.remove()
-Element.removeAttributeNode()
-Element.removeAttributeNS()
-Element.requestFullscreen()
-Element.requestPointerLock()
-Element.scrollIntoView()
-Element.setAttributeNode()
-Element.setAttributeNodeNS()
-Element.setAttributeNS()
-Element.setCapture()
+
+## 10.2 DOM 操作
+### 动态脚本
+* 动态插入外部脚本文件
+
+```
+  function loadScript(url) {
+    var script = document.createElement('script');
+    script.src = url;
+    document.body.appendChild(script);
+  }
+  loadScript("client.js");
+```
+* 动态插入js代码
+
+```
+  function loadScriptCode(code) {
+    var script = document.createElement('script');
+    script.type = "text/javascript";
+    try {
+      script.appendChild(document.createTextNode(code));
+    } catch (ex) {
+      script.text = code;
+    }
+    document.body.appendChild(script);
+  }
+  loadScriptCode("function sayHi(){alert('hi');}");
+
+```
+
+### 动态样式
+* 动态插入外部样式文件
+
+```
+  function loadStyle(url) {
+    var link = document.createElement('link');
+    link.rel = "stylesheet";
+    link.src = url;
+    document.head.appendChild(link);
+  }
+  loadStyle("style.css");
+```
+* 动态插入css代码
+
+```
+  function loadStyleCode(code) {
+    var style = document.createElement('style');
+    style.type = "text/css";
+    try {
+      style.appendChild(document.createTextNode(code));
+    } catch (ex) {
+      style.styleSheet.cssText = code;
+    }
+    document.head.appendChild(style);
+  }
+  loadStyleCode("body{background:red}");
+```
