@@ -168,7 +168,6 @@
     console.log(element.childNodes.length); // 1
     console.log(element.firstChild.nodeValue); // "hello world!forever young!"
 ```
-***
 
 ### Document 类型
 ```
@@ -238,29 +237,6 @@
   除了进行 implementation.hasFeature() 的检测，还要进行能力检测
 ```
 
-###### 不常用的
-* document.activeElement
-* document.cookie
-* document.defaultView
-* document.designMode
-* document.dir
-* document.documentURI
-* document.embeds
-* document.lastModified
-* document.lastStyleSheetSet
-* document.location
-* document.onafterscriptexecute
-* document.onbeforescriptexecute
-* document.onoffline
-* document.ononline
-* document.origin
-* document.plugins
-* document.preferredStyleSheetSet
-* document.readyState
-* document.selectedStyleSheetSet
-* document.styleSheets
-* document.styleSheetSets
-
 #### Document.Methods
 * document.getElementById()
 
@@ -315,34 +291,6 @@
 * document.createElement()
 * document.createComment()
 * document.createTextNode()
-* document.adoptNode()
-* document.close()
-* document.createAttribute()
-* document.createCDATASection()
-* document.createDocumentFragment()
-* document.createElementNS()
-* document.createEvent()
-* document.createExpression()
-* document.createNSResolver()
-* document.createNodeIterator()
-* document.createProcessingInstruction()
-* document.createRange()
-* document.createTouch()
-* document.createTouchList()
-* document.createTreeWalker()
-* document.enableStyleSheetsForSet
-* document.evaluate()
-* document.execCommand()
-* document.getSelection()
-* document.hasFocus
-* document.importNode
-* document.open
-* document.queryCommandSupported
-* document.querySelector()
-* document.querySelectorAll()
-* document.registerElement()
-* document.write
-* document.writeln
 
 ### Element 类型
 ```
@@ -354,3 +302,85 @@
     Element.ownerDocument // Document
     Element.childNodes // Element、Text、Comment
 ```
+* 常用元素的类型：
+
+    元素 | 类型
+    ------------ | ------------- |
+    HTML| HTMLHtmlElement  |
+    HEAD| HTMLHeadElement  |
+    TITLE| HTMLTitleElement  |
+    META| HTMLMetaElement  |
+    LINK| HTMLLinkElement  |
+    STYLE| HTMLStyleElement  |
+    BODY| HTMLBodyElement  |
+    IFRAME| HTMLIFrameElement  |
+    TABLE| HTMLTableElement  |
+    DIV| HTMLDivElement  |
+    H1-H6| HTMLHeadingElement  |
+    P| HTMLParagraphElement  |
+    SPAN| HTMLElement  |
+    A | HTMLAnchorElement  |
+    BUTTON| HTMLButtonElement  |
+    IMG| HTMLImageElement  |
+    OL| HTMLOListElement  |
+    UL| HTMLUListElement  |
+    LI| HTMLLIElement  |
+    FORM| HTMLFormElement  |
+    FIELDSET| HTMLFieldSetElement  |
+    INPUT| HTMLInputElement  |
+    TEXTAREA| HTMLTextAreaElement  |
+    SCRIPT| HTMLScriptElement  |
+
+Element.getAttribute("attrName")
+
+```
+  参数 attrName 不区分大小写
+  Element.getAttribute("style") 返回的是 style 属性值中包含的 css 文本
+  Element.style 返回的是一个对象
+  Element.getAttribute("onClick") 返回的是 onClick 属性值中包含的 js 文本
+  Element.onClick 返回的是一个函数
+    HTML:
+      <button style="background: lightgreen; color: #fff;" onclick="alert('run');">click me</button>
+    JS:
+      var btn = document.getElementsByTagName('button')[0];
+      console.log(btn.style); // [object CSSStyleDeclaration] 对象
+      console.log(btn.getAttribute('style')); // "background: lightgreen; color: #fff;"
+      console.log(btn.onclick); // function onclick(event) {alert('run');}
+      console.log(btn.getAttribute('onclick')); // "alert('run');"
+```
+Element.setAttribute("attrName", "value")
+
+```
+  如果属性 attrName 已经存在，则设置为新值
+  如果属性 attrName 不存在，则创建属性并设值
+  通过 setAttribute() 方法设置的属性，其属性名均会被转换为"小写形式"
+```
+Element.removeAttribute("attrName")
+
+
+Element.closest()
+Element.getAttributeNode()
+Element.getAttributeNodeNS()
+Element.getAttributeNS()
+Element.getBoundingClientRect()
+Element.getClientRects()
+Element.getElementsByClassName()
+Element.getElementsByTagName()
+Element.getElementsByTagNameNS()
+Element.hasAttribute()
+Element.hasAttributeNS()
+Element.hasAttributes()
+Element.insertAdjacentHTML()
+Element.matches()
+Element.querySelector()
+Element.querySelectorAll()
+ChildNode.remove()
+Element.removeAttributeNode()
+Element.removeAttributeNS()
+Element.requestFullscreen()
+Element.requestPointerLock()
+Element.scrollIntoView()
+Element.setAttributeNode()
+Element.setAttributeNodeNS()
+Element.setAttributeNS()
+Element.setCapture()
