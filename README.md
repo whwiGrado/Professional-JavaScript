@@ -78,12 +78,12 @@
 
   nodeType | value of nodeValue
   ------------ | :-----------: |
-  ELEMENT_NODE | null  |
-  TEXT_NODE | content of the text node  |
-  COMMENT_NODE | content of the comment  |
-  DOCUMENT_NODE | null  |
-  DOCUMENT_TYPE_NODE | null  |
-  DOCUMENT_FRAGMENT_NODE | null  |
+  ELEMENT_NODE (1)| null  |
+  TEXT_NODE (3)| content of the text node  |
+  COMMENT_NODE (8)| content of the comment  |
+  DOCUMENT_NODE (9)| null  |
+  DOCUMENT_TYPE_NODE (10)| null  |
+  DOCUMENT_FRAGMENT_NODE (11)| null  |
 
 * Node.ownerDocument
 
@@ -168,14 +168,7 @@
     console.log(element.childNodes.length); // 1
     console.log(element.firstChild.nodeValue); // "hello world!forever young!"
 ```
-
-###### 不常用的
-* Node.compareDocumentPosition()
-* Node.contains()
-* Node.isDefaultNamespace()
-* Node.isEqualNode()
-* Node.lookupNamespaceURI()
-* Node.lookupPrefix()
+***
 
 ### Document 类型
 ```
