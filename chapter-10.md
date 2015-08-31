@@ -183,15 +183,14 @@
 * document.doctype
 * document.documentElement
 * document.body
-* document.head
+
 
 ```
   document.doctype.nodeName 是 "html"
   document.doctype.nodeType 是 10
   document.documentElement 返回 document 的根元素 "HTML" 元素
   document.body 返回 document "BODY" 元素
-  document.head 返回 document "HEAD" 元素
-  后三者的 nodeType 都是 1
+  后两项的 nodeType 都是 1
 ```
 * document.title
 * document.URL
@@ -282,8 +281,6 @@
     JS:
       var radios = document.getElementsByName('color');
 ```
-* document.getElementsByClassName()
-* document.getElementsByTagNameNS()
 
 * document.createElement()
 * document.createTextNode()
