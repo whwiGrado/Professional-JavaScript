@@ -234,6 +234,7 @@
   除了进行 implementation.hasFeature() 的检测，还要进行能力检测
 ```
 
+
 #### Document.Methods
 * document.getElementById()
 
@@ -292,6 +293,11 @@
     document.createTextNode() 创建新的文本节点
     document.createComment() 创建新的注释节点
 ```
+
+* document.open()
+* document.close()
+* document.write()
+* document.writeln()
 
 ### Element 类型
 ```
