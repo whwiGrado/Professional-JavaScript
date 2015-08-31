@@ -19,9 +19,10 @@ querySelectorAll 返回的是一个带有所有属性和方法的 NodeList 实�
 
 ## 元素遍历（IE9+）
 
-  方法| 返回值 |
+  属性名| 返回值 |
   ------------ | :-----------: |
   childElementCount| 返回子元素的个数（不包含文本节点和注释节点） |
+  children| childNodes 的元素版（不包含文本节点和注释节点）|
   firstElementChild| firstChild 的元素版 |
   lastElementChild| laseChild 的元素版 |
   previousElementSibling| previousSibling 的元素版 |

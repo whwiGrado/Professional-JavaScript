@@ -75,7 +75,6 @@
 * Document.head
 * Document.characterSet
 * Document.hasFocus()
-
 * Element.classList
 * Element.innerHTML
 * Element.outerHTML

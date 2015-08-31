@@ -1,6 +1,5 @@
 Document.applets
 Document.bgColor
-ParentNode.children
 Document.contentType
 Document.currentScript
 Document.defaultView
@@ -100,7 +99,6 @@ Document.releaseCapture()
 
 
 Element.accessKey
-ParentNode.children
 Element.className
 Element.clientHeight
 Element.clientLeft
