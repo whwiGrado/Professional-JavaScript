@@ -5,6 +5,7 @@
 ```
 
 #第十章 DOM
+
 ## 10.1 节点层次
 * Node.childNodes
 * Node.parentNode
@@ -61,6 +62,7 @@
 
 
 #第十一章 DOM 扩展
+
 ## 选择符API
 * Element.querySelector()
 * Element.querySelectorAll()
@@ -86,5 +88,7 @@
 * Element.insertAdjacentHTML()
 * Element.scrollIntoView()
 
-
 ## 专有扩展
+
+#第十二章 DOM2 和 DOM3
+

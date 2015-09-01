@@ -1,4 +1,5 @@
 #第十一章 DOM 扩展
+
 ## 选择符API（IE8+）
 
                | querySelector | querySelectorAll
@@ -189,6 +190,6 @@ querySelectorAll 返回的是一个带有所有属性和方法的 NodeList 实�
 
 ## 专有扩展
 
-
+*
 
 

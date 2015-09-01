@@ -98,7 +98,7 @@
 ```
   Element.style 属性返回一个 CSSStyleDeclaration 的实例，即 style 对象
   这个对象拥有的属性和方法如下（IE9+）
-    - style.cssName: cssName 是驼峰式，例如：background-color > backgroundColor
+    - Element.style.cssName: cssName 是驼峰式，例如：background-color > backgroundColor
       > 返回的 sytle 对象只包含内联式定义的 css 样式
       > 一般 css 属性直接转驼峰就可以，但 float 属性名是 JS 中的保留字，所以(IE 与 FF 不同)
           var cssFloat = Element.style.cssFloat || Element.style.styleFloat;
@@ -110,19 +110,62 @@
           var computedStyle = document.defaultView.getComputedStyle(ele, null) || ele.currentStyle;
       > 获取到的 computedStyle.cssName 的值都是只读的
 ```
+
 ### 操作元素的样式
 
 * Document.styleSheets
+* Document.getElementsByTagName('link')[0].sheet
+* Document.getElementsByTagName('style')[0].sheet
+
+```
+  Document.styleSheets
+    > 返回 StyleSheetList 对象
+    > 对象中存有文档中所有 CSSStyleSheet 对象（外联式+嵌入式）
+    > CSSStyleSheet 对象在 StyleSheetList 中的顺序按照 <sytle>、<link> 标签在 <head> 中出现的顺序排列
+
+  Document.getElementsByTagName('link')[0].sheet
+    > 返回文档中的第一个外联式样式的 CSSStyleSheet 对象
+
+  Document.getElementsByTagName('style')[0].sheet
+    > 返回文档中的第一个嵌入式样式的 CSSStyleSheet 对象
+
+  CSSStyleSheet 对象的属性和方法：
+    属性：
+      > 只读属性
+        - href: 外联式 <link rel="stylesheet" href=""> 样式表的 url / null
+        - media: 当前样式表支持的所有媒体类型的集合
+        - ownerNode: 指向拥有当前样式表的节点，IE 不支持这个属性
+        - ownerRule: null / 通过 @import 导入时不为 null
+        - parentStyleSheet: null / 通过 @import 导入时不为 null
+        - cssRules: 当前样式表中包含的样式规则的集合，IE 下为 rules 属性
+        - rules: 同 cssRules
+        - title: ownerNode 指向的节点的 title 属性的值
+        - type: "text/css"
+      > 读写属性
+        - disabled: true 禁用当前样式表 / false 不禁用
+    方法：
+      - deleteRule(index) 删除 rules 集合中指定位置的规则，IE 下为 removeRule() 方法
+      - insertRule(rule, index) 在 rules 集合中的指定位置插入 rule 规则，IE 下为 addRule() 方法
+
+    例子：获取文档中的第一个 CSSStyleSheet 对象（外联式 或 嵌入式）
+      var styleSheetList = []
+      ,   firstCssStyleSheet
+      ,   childName
+      ,   headChildren = document.head.children;
+
+      for (var i=0; i<headChildren.length; i++) {
+        childName = headChildren[i].nodeName.toLowerCase();
+        if (childName === "style" || childName === "link") {
+          styleSheetList.push(headChildren[i].sheet);
+        }
+      }
+      firstCssStyleSheet = styleSheetList[0];
+      console.log(document.styleSheets[0] === firstCssStyleSheet); // true
+```
 
 
 ## 12.3 遍历
 ## 12.4 范围
-
-
-
-
-
-
 
 
 
