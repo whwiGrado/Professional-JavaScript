@@ -114,6 +114,26 @@
 
 * Document.styleSheets
 
+```
+  返回 StyleSheetList 对象，对象中存有文档中所有 CSSStyleSheet 对象（外联式+嵌入式）
+    其中的 CSSStyleSheet 对象在 StyleSheetList 中的顺序
+    按照 <sytle>、<link> 标签在 <head> 中出现的顺序排列
+
+      var styleSheetList = []
+      ,   firstCssStyleSheet
+      ,   childName
+      ,   headChildren = document.head.children;
+
+      for (var i=0; i<headChildren.length; i++) {
+        childName = headChildren[i].nodeName.toLowerCase();
+        if (childName === "style" || childName === "link") {
+          styleSheetList.push(headChildren[i].sheet);
+        }
+      }
+      firstCssStyleSheet = styleSheetList[0];
+      console.log(document.styleSheets[0] === firstCssStyleSheet); // true
+```
+
 
 ## 12.3 遍历
 ## 12.4 范围
