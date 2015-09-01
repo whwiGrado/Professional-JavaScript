@@ -293,7 +293,6 @@
     document.createTextNode() 创建新的文本节点
     document.createComment() 创建新的注释节点
 ```
-
 * document.open()
 * document.close()
 * document.write()
