@@ -1,4 +1,5 @@
 #第十二章 DOM2 和 DOM3
+
 ## 12.1 DOM变化
 ### 针对 XML 命名空间的变化
 #### Node 类型的变化
@@ -137,32 +138,71 @@
         - ownerNode: 指向拥有当前样式表的节点，IE 不支持这个属性
         - ownerRule: null / 通过 @import 导入时不为 null
         - parentStyleSheet: null / 通过 @import 导入时不为 null
-        - cssRules: 当前样式表中包含的样式规则的集合，IE 下为 rules 属性
-        - rules: 同 cssRules
+        - cssRules: CSSStyleRule 对象的集合，IE 下为 rules 属性（只适用于嵌入式）
+        - rules: 同 cssRules（只适用于嵌入式）
         - title: ownerNode 指向的节点的 title 属性的值
         - type: "text/css"
       > 读写属性
         - disabled: true 禁用当前样式表 / false 不禁用
-    方法：
+    方法：（只适用于嵌入式）
       - deleteRule(index) 删除 rules 集合中指定位置的规则，IE 下为 removeRule() 方法
       - insertRule(rule, index) 在 rules 集合中的指定位置插入 rule 规则，IE 下为 addRule() 方法
 
-    例子：获取文档中的第一个 CSSStyleSheet 对象（外联式 或 嵌入式）
-      var styleSheetList = []
-      ,   firstCssStyleSheet
-      ,   childName
-      ,   headChildren = document.head.children;
+  CSSStyleRule 对象的属性：
+    - cssText(只读): 与 Element.style.cssText 有点不同，因为其包含选择符文本和花括号
+    - sytle(读写): 返回一个 CSSStyleDeclaration 的实例，同 Element.style
 
-      for (var i=0; i<headChildren.length; i++) {
-        childName = headChildren[i].nodeName.toLowerCase();
-        if (childName === "style" || childName === "link") {
-          styleSheetList.push(headChildren[i].sheet);
-        }
+  例子：获取文档中的第一个 CSSStyleSheet 对象（外联式 或 嵌入式）
+    var styleSheetList = []
+    ,   firstCssStyleSheet
+    ,   firstCssStyleRule
+    ,   childName
+    ,   headChildren = document.head.children;
+
+    for (var i=0; i<headChildren.length; i++) {
+      childName = headChildren[i].nodeName.toLowerCase();
+      if (childName === "style" || childName === "link") {
+        styleSheetList.push(headChildren[i].sheet);
       }
-      firstCssStyleSheet = styleSheetList[0];
-      console.log(document.styleSheets[0] === firstCssStyleSheet); // true
+    }
+    firstCssStyleSheet = styleSheetList[0];
+    console.log(document.styleSheets[0] === firstCssStyleSheet); // true
+    firstCssStyleRule = firstCssStyleSheet.cssRules[0];
+    console.log(firstCssStyleRule);
+```
+### 元素的大小
+
+#### 偏移量
+* Element.offsetHeight
+* Element.offsetWidth
+* Element.offsetTop
+* Element.offsetLeft
+* Element.offsetParent
+
+```
+  Element.offsetHeight 与 Element.offsetWidth 是由元素的 4 部分相加得到的
+    - content
+    - padding
+    - border
+    - 滚动条
+
+  Element.offsetTop 与 Element.offsetLeft 是由 3 个部分相加得到的
+    - Element 的 margin—top / margin—left
+    - Element.offsetParent 的 padding—top / padding—left
+    - Element.offsetParent 的 border—top-width / border—left-width
+
+  Element.offsetParent 与 Element.parentNode 很多时候不相等，所以会影响 offsetTop 和 offsetLeft 的计算值
 ```
 
+#### 客户区大小
+* Element.clientHeight
+* Element.clientLeft
+* Element.clientTop
+* Element.clientWidth
+
+```
+  
+```
 
 ## 12.3 遍历
 ## 12.4 范围
@@ -268,10 +308,7 @@ Document.releaseCapture()
 
 Element.accessKey
 Element.className
-Element.clientHeight
-Element.clientLeft
-Element.clientTop
-Element.clientWidth
+
 Element.id
 Element.name
 Element.onwheel
@@ -282,7 +319,6 @@ Element.scrollTop
 Element.scrollTopMax
 Element.scrollWidth
 Element.tabStop
-Element.tagName
 
 Element.closest()
 Element.getBoundingClientRect()
