@@ -42,14 +42,14 @@
 
 ```
   var div = firstElementChild(document.getElementById('container'));
-  while (div!==null) {
-    div.onclick= swapWithPreviousElement;
+  while (div !== null) {
+    div.onclick = swapWithPreviousElement;
     div= nextElementSibling(div);
   }
 
   function swapWithPreviousElement() {
-    var previous= previousElementSibling(this);
-    if (previous!==null) {
+    var previous = previousElementSibling(this);
+    if (previous !== null) {
       this.parentNode.insertBefore(this, previous);
     }
   }
@@ -77,12 +77,18 @@
 
     return element;
   }
+
   function firstElementChild(element) {
-     if ('firstElementChild' in element)
-         return element.firstElementChild;
-     var child= element.firstChild;
-     while (child!==null && child.nodeType!==1)
-         child= child.nextSibling;
-     return child;
+    if ('firstElementChild' in element) {
+      return element.firstElementChild;
+    }
+
+    var child = element.firstChild;
+
+    while (child !== null && child.nodeType !==1 ) {
+      child= child.nextSibling;
+    }
+
+    return child;
   }
 ```
