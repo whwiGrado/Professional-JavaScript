@@ -13,9 +13,15 @@
   Element 调用时 | 该元素后代里检索 | 该元素后代里检索 |
 
 ```
-querySelectorAll 返回的是一个带有所有属性和方法的 NodeList 实例
-相当于 NodeList 的快照，而非不断对文档进行搜索的动态查询
-这样可以避免使用 NodeList 对象引起的大多数性能问题
+  querySelector(selectors)
+  如果要匹配的ID或选择器不符合 CSS语法（比如不恰当地使用了冒号或者空格）
+  你必须用反斜杠将这些字符转义
+  而且你必须将它转义两次（一次是为 JavaScript 字符串转义，另一次是为 querySelector 转义）
+
+  querySelectorAll(selectors)
+  返回的是一个带有所有属性和方法的 NodeList 实例
+  相当于 NodeList 的快照，而非不断对文档进行搜索的动态查询
+  这样可以避免使用 NodeList 对象引起的大多数性能问题
 ```
 
 ## 元素遍历（IE9+）
@@ -42,16 +48,19 @@ querySelectorAll 返回的是一个带有所有属性和方法的 NodeList 实�
 ```
 
 * classList (IE10+)
+* className
 
 ```
-  Element.classList 返回一个 DOMTokenList 的实例
-  这个实例有一个 length 属性，和四个方法:
-  classList.add('className1') or classList.add('className1', 'className2', ...)
-  classList.remove('className1') or classList.remove('className1', 'className2', ...)
-  classList.toggle('classToBeRemoved', false)
-  classList.toggle('classToBeadded', true)
-  classList.contains('className')
+  Element.classList
+  返回一个 DOMTokenList 的实例，这个实例有一个 length 属性，和四个方法:
+    classList.add('className1') or classList.add('className1', 'className2', ...)
+    classList.remove('className1') or classList.remove('className1', 'className2', ...)
+    classList.toggle('classToBeRemoved', false)
+    classList.toggle('classToBeadded', true)
+    classList.contains('className')
 
+  Element.className
+  返回一个字符串，包含此 Element 的所有类名（用空格分开）
 ```
 
 #### 焦点管理
@@ -190,6 +199,5 @@ querySelectorAll 返回的是一个带有所有属性和方法的 NodeList 实�
 
 ## 专有扩展
 
-*
 
 
