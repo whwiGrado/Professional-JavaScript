@@ -93,6 +93,13 @@
 ```
 
 * Node.baseURI
+
+```
+  返回某个节点绝对的基 URI，当浏览器需要绝对 URL 时使用
+    例如需要解析 HTML <img> 元素的 src 属性时
+  与 window.location.href 的返回值相同，但是可能会随时间发生变化
+```
+
 * Node.textContent
 
 ### Node.Methods
@@ -140,7 +147,7 @@
           <li>a</li>
           <li>b</li>
           <li>c</li>
-        </ul>
+      </ul>
     JS:
       var myList = document.getElementById('list');
       var deepList = myList.cloneNode(true);
@@ -254,7 +261,7 @@
     var firstItem = getElementsByTagName('body')[0];
     var secondItem = getElementsByTagName('body').item(1);
     var img = getElementsByTagName('img').namedItem('myLogo');
-  document.getElementsByTagName('*') 返回返回整个页面中的所有元素
+    （其中 myLogo 是元素的 name 属性）
 ```
 * document.getElementsByName()
 
@@ -311,32 +318,32 @@
 ```
 #### 常用元素的类型：
 
-    元素 | 类型
-    ------------ | ------------- |
-    HTML| HTMLHtmlElement  |
-    HEAD| HTMLHeadElement  |
-    TITLE| HTMLTitleElement  |
-    META| HTMLMetaElement  |
-    LINK| HTMLLinkElement  |
-    STYLE| HTMLStyleElement  |
-    BODY| HTMLBodyElement  |
-    IFRAME| HTMLIFrameElement  |
-    TABLE| HTMLTableElement  |
-    DIV| HTMLDivElement  |
-    H1-H6| HTMLHeadingElement  |
-    P| HTMLParagraphElement  |
-    SPAN| HTMLElement  |
-    A | HTMLAnchorElement  |
-    BUTTON| HTMLButtonElement  |
-    IMG| HTMLImageElement  |
-    OL| HTMLOListElement  |
-    UL| HTMLUListElement  |
-    LI| HTMLLIElement  |
-    FORM| HTMLFormElement  |
-    FIELDSET| HTMLFieldSetElement  |
-    INPUT| HTMLInputElement  |
-    TEXTAREA| HTMLTextAreaElement  |
-    SCRIPT| HTMLScriptElement  |
+      元素 | 类型
+      ------------ | ------------- |
+      HTML| HTMLHtmlElement  |
+      HEAD| HTMLHeadElement  |
+      TITLE| HTMLTitleElement  |
+      META| HTMLMetaElement  |
+      LINK| HTMLLinkElement  |
+      STYLE| HTMLStyleElement  |
+      BODY| HTMLBodyElement  |
+      IFRAME| HTMLIFrameElement  |
+      TABLE| HTMLTableElement  |
+      DIV| HTMLDivElement  |
+      H1-H6| HTMLHeadingElement  |
+      P| HTMLParagraphElement  |
+      SPAN| HTMLElement  |
+      A | HTMLAnchorElement  |
+      BUTTON| HTMLButtonElement  |
+      IMG| HTMLImageElement  |
+      OL| HTMLOListElement  |
+      UL| HTMLUListElement  |
+      LI| HTMLLIElement  |
+      FORM| HTMLFormElement  |
+      FIELDSET| HTMLFieldSetElement  |
+      INPUT| HTMLInputElement  |
+      TEXTAREA| HTMLTextAreaElement  |
+      SCRIPT| HTMLScriptElement  |
 
 #### Element.Properties
 * Element.attributes
