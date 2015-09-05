@@ -24,10 +24,10 @@
         var array = null;
         try {
           array = Array.prototype.slice.call(nodes, 0);
-        } catch (ex) { // <=IE8
+        } catch (ex) { // <= IE8，NodeList 被实现为一个 COM 对象，所以运行上面这行代码会报错
           array = [];
           for (var i=0, len=nodes.length; i<len; i++){
-            array.push(nodes[i]);
+            array.push(nodes[i]); // 所以要实现 <= IE8 的 NodeList 转数组只能枚举
           }
         }
     }
