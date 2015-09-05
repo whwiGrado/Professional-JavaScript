@@ -32,7 +32,6 @@
         }
     }
     converToArray(someNode.childNodes);
-
 ```
 * Node.parentNode
 * Node.parentElement
@@ -91,7 +90,6 @@
   document.body.ownerDocument // document 对象
   document.head.ownerDocument // document 对象
 ```
-
 * Node.baseURI
 
 ```
@@ -99,7 +97,6 @@
     例如需要解析 HTML <img> 元素的 src 属性时
   与 window.location.href 的返回值相同，但是可能会随时间发生变化
 ```
-
 * Node.textContent
 
 ### Node.Methods
@@ -128,14 +125,11 @@
 ```
   返回 replacedNode
 ```
-
 * Node.removeChild( removedNode )
 
 ```
   返回 removedNode
 ```
-
-
 * Node.cloneNode( deep )
 
 ```
@@ -155,7 +149,6 @@
       var shallowList = myList.cloneNode(false);
       console.log(shallowList.childNodes.length); // 0
 ```
-
 * Node.normalize()
 
 ```
@@ -174,7 +167,6 @@
     console.log(element.childNodes.length); // 1
     console.log(element.firstChild.nodeValue); // "hello world!forever young!"
 ```
-
 ### Document 类型
 ```
   document 对象是 HTMLDocument 类型的一个实例，HTMLDocument 类型继承自 Document 类型
@@ -191,7 +183,6 @@
 * document.doctype
 * document.documentElement
 * document.body
-
 
 ```
   document.doctype.nodeName 是 "html"
@@ -223,7 +214,6 @@
 * document.images
 * document.scripts
 
-
 ```
   document.links 返回带有 href 属性的 <a> 元素的 HTMLCollection
   document.anchors 返回带有 name 属性的 <a> 元素的 HTMLCollection
@@ -241,8 +231,6 @@
   尽管 implementation.hasFeature() 很方便，但是在使用 DOM 的某些特殊功能之前
   除了进行 implementation.hasFeature() 的检测，还要进行能力检测
 ```
-
-
 #### Document.Methods
 * document.getElementById()
 
@@ -290,7 +278,6 @@
     JS:
       var radios = document.getElementsByName('color');
 ```
-
 * document.createElement()
 * document.createTextNode()
 * document.createComment()
@@ -305,7 +292,6 @@
 * document.close()
 * document.write()
 * document.writeln()
-
 ### Element 类型
 ```
   Element 继承自 Node 类型的属性：
@@ -318,32 +304,32 @@
 ```
 #### 常用元素的类型：
 
-      元素 | 类型
-      ------------ | ------------- |
-      HTML| HTMLHtmlElement  |
-      HEAD| HTMLHeadElement  |
-      TITLE| HTMLTitleElement  |
-      META| HTMLMetaElement  |
-      LINK| HTMLLinkElement  |
-      STYLE| HTMLStyleElement  |
-      BODY| HTMLBodyElement  |
-      IFRAME| HTMLIFrameElement  |
-      TABLE| HTMLTableElement  |
-      DIV| HTMLDivElement  |
-      H1-H6| HTMLHeadingElement  |
-      P| HTMLParagraphElement  |
-      SPAN| HTMLElement  |
-      A | HTMLAnchorElement  |
-      BUTTON| HTMLButtonElement  |
-      IMG| HTMLImageElement  |
-      OL| HTMLOListElement  |
-      UL| HTMLUListElement  |
-      LI| HTMLLIElement  |
-      FORM| HTMLFormElement  |
-      FIELDSET| HTMLFieldSetElement  |
-      INPUT| HTMLInputElement  |
-      TEXTAREA| HTMLTextAreaElement  |
-      SCRIPT| HTMLScriptElement  |
+    元素 | 类型
+    ------------ | ------------- |
+    HTML| HTMLHtmlElement  |
+    HEAD| HTMLHeadElement  |
+    TITLE| HTMLTitleElement  |
+    META| HTMLMetaElement  |
+    LINK| HTMLLinkElement  |
+    STYLE| HTMLStyleElement  |
+    BODY| HTMLBodyElement  |
+    IFRAME| HTMLIFrameElement  |
+    TABLE| HTMLTableElement  |
+    DIV| HTMLDivElement  |
+    H1-H6| HTMLHeadingElement  |
+    P| HTMLParagraphElement  |
+    SPAN| HTMLElement  |
+    A | HTMLAnchorElement  |
+    BUTTON| HTMLButtonElement  |
+    IMG| HTMLImageElement  |
+    OL| HTMLOListElement  |
+    UL| HTMLUListElement  |
+    LI| HTMLLIElement  |
+    FORM| HTMLFormElement  |
+    FIELDSET| HTMLFieldSetElement  |
+    INPUT| HTMLInputElement  |
+    TEXTAREA| HTMLTextAreaElement  |
+    SCRIPT| HTMLScriptElement  |
 
 #### Element.Properties
 * Element.attributes
@@ -358,7 +344,9 @@
         for (i=0, len=element.attributes.length; i<len; i++) {
           attrName = element.attributes[i].nodeName;
           attrValue = element.attributes[i].nodeValue;
-          if (element.attributes[i].specified) { // IE<7
+          if (element.attributes[i].specified) {
+            // IE<=7 时，element.attributes[i].specified 的值为 true 时
+            // 表明：要么在 HTML 中设置了该属性的值，要么使用了 setAttribute() 方法设置了该属性
             output.push(attrName + '="' + attrValue + '"');
           }
         }
@@ -367,7 +355,6 @@
       return output.join(" ");
     }
 ```
-
 #### Element.Methods
 * Element.getElementsByClassName()
 * Element.getElementsByTagName()
@@ -402,7 +389,6 @@
   如果属性 attrName 不存在，则创建属性并设值
   通过 setAttribute() 方法设置的属性，其属性名均会被转换为"小写形式"
 ```
-
 * Element.hasAttribute("attrName")
 * Element.hasAttributes()
 * Element.removeAttribute("attrName")
@@ -435,7 +421,6 @@
     <!-- 有内容，因而有一个文本节点 -->
     <div>hello world!</div>
 ```
-
 #### Text.Methods
 * Text.splitText(offset)
 
@@ -457,7 +442,6 @@
     console.log(newNode === element.childNodes[1]); // true
     console.log(element.childNodes[1].nodeValue); // " world!"
 ```
-
 ### Comment 类型
 ```
   Comment 继承自 Node 类型的属性：
@@ -468,7 +452,6 @@
     Comment.ownerDocument // Document
     Comment.childNodes // 没有子节点
 ```
-
 ### DocumentFragment 类型
 ```
   DocumentFragment 继承自 Node 类型的属性：
@@ -480,7 +463,6 @@
     DocumentFragment.childNodes // Element、Text、Comment
 ```
 #### DocumentFragment 文档片段的作用
-
 ```
   给一个 ul 添加3个 li ，如果逐个添加到文档中，会导致浏览器反复渲染
   可以使用文档片段来保存这3个 li ，再一次性添加到文档中
@@ -495,9 +477,6 @@
     }
     ul.appendChild(fragment);
 ```
-
-
-
 ## 10.2 DOM 操作
 ### 动态脚本
 * 动态插入外部脚本文件
@@ -524,9 +503,7 @@
     document.body.appendChild(script);
   }
   loadScriptCode("function sayHi(){alert('hi');}");
-
 ```
-
 ### 动态样式
 * 动态插入外部样式文件
 
