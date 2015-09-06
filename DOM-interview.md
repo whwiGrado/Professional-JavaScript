@@ -239,8 +239,8 @@
       container.appendChild(fragment);
       console.log(new Date() - start);
     }
-    
-  // method2: 利用 createElement() 
+
+  // method2: 利用 createElement()
     function appendMethod2(){
       var container = document.getElementById("test");
       var start = new Date();

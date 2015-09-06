@@ -351,8 +351,7 @@
           }
         }
       }
-
-      return output.join(" ");
+      return output;
     }
 ```
 #### Element.Methods

@@ -192,6 +192,16 @@
     - Element.offsetParent 的 border—top-width / border—left-width
 
   Element.offsetParent 与 Element.parentNode 很多时候不相等，所以会影响 offsetTop 和 offsetLeft 的计算值
+    例如 div 的 Element.offsetParent 永远是 body
+      HTML:
+        <div id="container">
+          <div id="child"></div>
+        </div>
+      JS:
+        var container = document.getElementById('container');
+        var child = document.getElementById('child');
+        console.log(container.offsetParent.nodeName); // "BODY"
+        console.log(child.offsetParent.nodeName); // "BODY"
 ```
 
 #### 客户区大小
@@ -206,125 +216,3 @@
 
 ## 12.3 遍历
 ## 12.4 范围
-
-
-
-
-
-
-Document.applets
-Document.bgColor
-Document.contentType
-Document.currentScript
-Document.designMode
-Document.dir
-Document.documentURI
-Document.documentURIObject
-Document.domConfig
-Document.embeds
-Document.fgColor
-Document.height
-Document.inputEncoding
-Document.lastModified
-Document.lastStyleSheetSet
-Document.linkColor
-Document.location
-Document.mozFullScreen
-Document.mozFullScreenElement
-Document.mozFullScreenEnabled
-Document.mozSyntheticDocument
-GlobalEventHandlers.onabort
-Document.onafterscriptexecute
-Document.onbeforescriptexecute
-GlobalEventHandlers.onblur
-GlobalEventHandlers.onchange
-GlobalEventHandlers.onclick
-GlobalEventHandlers.onclose
-GlobalEventHandlers.oncontextmenu
-GlobalEventHandlers.ondblclick
-GlobalEventHandlers.onerror
-GlobalEventHandlers.onfocus
-GlobalEventHandlers.oninput
-GlobalEventHandlers.onkeydown
-GlobalEventHandlers.onkeypress
-GlobalEventHandlers.onkeyup
-GlobalEventHandlers.onload
-GlobalEventHandlers.onmousedown
-GlobalEventHandlers.onmousemove
-GlobalEventHandlers.onmouseout
-GlobalEventHandlers.onmouseover
-GlobalEventHandlers.onmouseup
-Document.onoffline
-Document.ononline
-GlobalEventHandlers.onreset
-GlobalEventHandlers.onresize
-GlobalEventHandlers.onscroll
-GlobalEventHandlers.onselect
-GlobalEventHandlers.onsubmit
-Document.origin
-Document.plugins
-Document.pointerLockElement
-Document.popupNode
-Document.preferredStyleSheetSet
-Document.scrollingElement
-Document.selectedStyleSheetSet
-Document.styleSheetSets
-Document.tooltipNode
-Document.vlinkColor
-Document.width
-Document.xmlEncoding
-
-Document.adoptNode()
-Document.caretPositionFromPoint()
-Document.caretRangeFromPoint()
-Document.clear()
-Document.createCDATASection()
-Document.createDocumentFragment()
-Document.createEntityReference()
-Document.createEvent()
-Document.createExpression()
-Document.createNodeIterator()
-Document.createNSResolver()
-Document.createProcessingInstruction()
-Document.createRange()
-Document.createTouch()
-Document.createTouchList()
-Document.createTreeWalker()
-Document.elementFromPoint()
-Document.enableStyleSheetsForSet()
-Document.evaluate()
-Document.execCommand()
-Document.exitPointerLock()
-Document.getBoxObjectFor()
-Document.getSelection()
-Document.loadOverlay()
-Document.mozCancelFullScreen()
-Document.mozSetImageElement()
-Document.queryCommandSupported()
-Document.registerElement()
-Document.releaseCapture()
-
-
-
-Element.accessKey
-Element.className
-
-Element.id
-Element.name
-Element.onwheel
-Element.scrollHeight
-Element.scrollLeft
-Element.scrollLeftMax
-Element.scrollTop
-Element.scrollTopMax
-Element.scrollWidth
-Element.tabStop
-
-Element.closest()
-Element.getBoundingClientRect()
-Element.getClientRects()
-Element.matches()
-ChildNode.remove()
-Element.requestFullscreen()
-Element.requestPointerLock()
-Element.setCapture()
