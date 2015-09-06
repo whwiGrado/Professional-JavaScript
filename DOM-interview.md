@@ -11,7 +11,7 @@
 * 2.如何用 JS 遍历 DOM 树 ？
 
 ```
-  
+
 ```
 
 * 3.querySelector 与 querySelectorAll 是什么 ？
@@ -95,20 +95,20 @@
 
 ```
   var div = firstElementChild(document.getElementById('container'));
-  while (div !== null) {
+  while (div !== null){
     div.onclick = swapWithPreviousElement;
     div= nextElementSibling(div);
   }
 
-  function swapWithPreviousElement() {
+  function swapWithPreviousElement(){
     var previous = previousElementSibling(this);
-    if (previous !== null) {
+    if(previous !== null){
       this.parentNode.insertBefore(this, previous);
     }
   }
 
-  function previousElementSibling(element) {
-    if ('previousElementSibling' in element) {
+  function previousElementSibling(element){
+    if('previousElementSibling' in element){
       return element.previousElementSibling;
     }
     do {
@@ -119,8 +119,8 @@
     return element;
   }
 
-  function nextElementSibling(element) {
-    if ('nextElementSibling' in element) {
+  function nextElementSibling(element){
+    if('nextElementSibling' in element){
       return element.nextElementSibling;
     }
     do {
@@ -131,14 +131,14 @@
     return element;
   }
 
-  function firstElementChild(element) {
-    if ('firstElementChild' in element) {
+  function firstElementChild(element){
+    if('firstElementChild' in element){
       return element.firstElementChild;
     }
 
     var child = element.firstChild;
 
-    while (child !== null && child.nodeType !==1 ) {
+    while (child !== null && child.nodeType !==1 ){
       child= child.nextSibling;
     }
 
@@ -149,17 +149,17 @@
 * 7.如何用JavaScript判断 DOM 元素节点是否有某个 class 类名 ？
 
 ```
-  var hasClass = (function() {
+  var hasClass = (function(){
     var div = document.createElement("div") ;
-    if( "classList" in div && typeof div.classList.contains === "function" ) {
-      return function(elem, className) {
+    if( "classList" in div && typeof div.classList.contains === "function" ){
+      return function(elem, className){
         return elem.classList.contains(className);
       };
     } else {
-      return function(elem, className) {
+      return function(elem, className){
         var classes = elem.className.split(/\s+/);
-        for(var i= 0 ; i < classes.length ; i ++) {
-          if( classes[i] === className ) {
+        for(var i= 0 ; i < classes.length ; i ++){
+          if( classes[i] === className ){
             return true ;
           }
         }
@@ -169,22 +169,55 @@
   })();
 ```
 
-* 8.
+* 8. offsetLeft 和 style.left 区别
 
 ```
+  - style.left 返回的是字符串，比如 "10px" 。而 offsetLeft 返回的是数值，比如数值 10
 
+  - style.left 是可读写的，offsetLeft 是只读的
+
+  - style.left 的值需要事先定义(只包含内联式定义的 css 样式)，否则取到的值是空的
 ```
 
-* .
+* 9.获取鼠标点击事件的位置
 
 ```
+  document.onclick = mouseClick;
 
+  function mouseClick(ev){
+      ev = ev || window.event; // window.event用来兼容IE
+      var x = 0; var y = 0;
+
+      if(ev.pageX){
+          x = ev.pageX;
+          y = ev.pageY;
+      }else if(ev.clientX){
+          var offsetX = 0 , offsetY = 0;
+          if(document.documentElement.scrollLeft){
+              offsetX = document.documentElement.scrollLeft;
+              offsetY = document.documentElement.scrollTop;
+          }else if(document.body){
+              offsetX = document.body.scrollLeft;
+              offsetY = document.body.scrollTop;
+          }
+          x = ev.clientX + offsetX;
+          y = ev.clientY + offsetY;
+      }
+      alert("你点击的位置是 x="+ x + " y=" + y);
+  }
 ```
 
-* .
+* 10. DOM 树的原型链
 
 ```
-
+  文档节点的原型链：
+    Document --> Node --> EventTarget --> Object
+  元素节点的原型链，以 <a> 元素为例：
+    HTMLAnchorElement --> HTMLElement --> Element --> Node --> EventTarget --> Object
+  注释节点的原型链：
+    Comment --> CharacterData --> Node --> EventTarget --> Object
+  文本节点的原型链：
+    Text --> CharacterData -- Node -- EventTarget --> Object
 ```
 
 * .
