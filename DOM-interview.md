@@ -86,64 +86,63 @@
 * 6.如何交换两个 DOM 对象 ？
 
 ```
-  <div id="container">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-  </div>
-```
-
-```
-  var div = firstElementChild(document.getElementById('container'));
-  while (div !== null){
-    div.onclick = swapWithPreviousElement;
-    div= nextElementSibling(div);
-  }
-
-  function swapWithPreviousElement(){
-    var previous = previousElementSibling(this);
-    if(previous !== null){
-      this.parentNode.insertBefore(this, previous);
-    }
-  }
-
-  function previousElementSibling(element){
-    if('previousElementSibling' in element){
-      return element.previousElementSibling;
-    }
-    do {
-      element = element.previousSibling;
-    }
-    while (element !== null && element.nodeType !== 1)
-
-    return element;
-  }
-
-  function nextElementSibling(element){
-    if('nextElementSibling' in element){
-      return element.nextElementSibling;
-    }
-    do {
-      element = element.nextElementSibling;
-    }
-    while (element !== null && element.nodeType !== 1)
-
-    return element;
-  }
-
-  function firstElementChild(element){
-    if('firstElementChild' in element){
-      return element.firstElementChild;
+  HTML:
+    <div id="container">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+    </div>
+  JS:
+    var div = firstElementChild(document.getElementById('container'));
+    while (div !== null){
+      div.onclick = swapWithPreviousElement;
+      div= nextElementSibling(div);
     }
 
-    var child = element.firstChild;
-
-    while (child !== null && child.nodeType !==1 ){
-      child= child.nextSibling;
+    function swapWithPreviousElement(){
+      var previous = previousElementSibling(this);
+      if(previous !== null){
+        this.parentNode.insertBefore(this, previous);
+      }
     }
 
-    return child;
-  }
+    function previousElementSibling(element){
+      if('previousElementSibling' in element){
+        return element.previousElementSibling;
+      }
+      do {
+        element = element.previousSibling;
+      }
+      while (element !== null && element.nodeType !== 1)
+
+      return element;
+    }
+
+    function nextElementSibling(element){
+      if('nextElementSibling' in element){
+        return element.nextElementSibling;
+      }
+      do {
+        element = element.nextElementSibling;
+      }
+      while (element !== null && element.nodeType !== 1)
+
+      return element;
+    }
+
+    function firstElementChild(element){
+      if('firstElementChild' in element){
+        return element.firstElementChild;
+      }
+
+      var child = element.firstChild;
+
+      while (child !== null && child.nodeType !==1 ){
+        child= child.nextSibling;
+      }
+
+      return child;
+    }
 ```
 
 * 7.如何用JavaScript判断 DOM 元素节点是否有某个 class 类名 ？
@@ -220,8 +219,46 @@
     Text --> CharacterData -- Node -- EventTarget --> Object
 ```
 
-* .
+* 11.innerHTML、createElement() 和 createDocumentFragment()
 
 ```
-
+  function appendMethod1(){
+    var container = document.getElementById("test");
+    var staDate = new Date();
+    for(var i=0; i<50000; i++){
+      var oDiv = document.createElement("div");
+      var oText = document.createTextNode("text");
+      oDiv.appendChild(oText);
+      container.appendChild(oDiv);
+    }
+    console.log(new Date - staDate);
+  }
+  function appendMethod2(){
+    var container = document.getElementById("test");
+    var staDate = new Date();
+    var arr = [];
+    for(var i=0; i<50000; i++){
+      var str="<div>test</div>";
+      arr.push(str);
+    }
+    var str = arr.join("");
+    container.innerHTML = str;
+    console.log(new Date() - staDate);
+  }
+  function appendMethod3(){
+    var container = document.getElementById("test");
+    var staDate = new Date();
+    var fragment = document.createDocumentFragment();
+    for (i=0; i<50000; i++) {
+      var oDiv = document.createElement('div');
+      var oText = document.createTextNode("text");
+      oDiv.appendChild(oText);
+      fragment.appendChild(oDiv);
+    }
+    container.appendChild(fragment);
+    console.log(new Date - staDate);
+  }
+  appendMethod1();
+  appendMethod2();
+  appendMethod3();
 ```
