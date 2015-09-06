@@ -222,43 +222,50 @@
 * 11.innerHTML、createElement() 和 createDocumentFragment()
 
 ```
-  function appendMethod1(){
-    var container = document.getElementById("test");
-    var staDate = new Date();
-    for(var i=0; i<50000; i++){
-      var oDiv = document.createElement("div");
-      var oText = document.createTextNode("text");
-      oDiv.appendChild(oText);
-      container.appendChild(oDiv);
+  HTML:
+    <div id="test"></div>
+  JS:
+  // method1: 利用 createDocumentFragment()
+    function appendMethod1(){
+      var container = document.getElementById("test");
+      var start = new Date();
+      var fragment = document.createDocumentFragment();
+      for (i=0; i<5000; i++) {
+        var oDiv = document.createElement('div');
+        var oText = document.createTextNode("text");
+        oDiv.appendChild(oText);
+        fragment.appendChild(oDiv);
+      }
+      container.appendChild(fragment);
+      console.log(new Date() - start);
     }
-    console.log(new Date - staDate);
-  }
-  function appendMethod2(){
-    var container = document.getElementById("test");
-    var staDate = new Date();
-    var arr = [];
-    for(var i=0; i<50000; i++){
-      var str="<div>test</div>";
-      arr.push(str);
+    
+  // method2: 利用 createElement() 
+    function appendMethod2(){
+      var container = document.getElementById("test");
+      var start = new Date();
+      for(var i=0; i<5000; i++){
+        var oDiv = document.createElement("div");
+        var oText = document.createTextNode("text");
+        oDiv.appendChild(oText);
+        container.appendChild(oDiv);
+      }
+      console.log(new Date() - start);
     }
-    var str = arr.join("");
-    container.innerHTML = str;
-    console.log(new Date() - staDate);
-  }
-  function appendMethod3(){
-    var container = document.getElementById("test");
-    var staDate = new Date();
-    var fragment = document.createDocumentFragment();
-    for (i=0; i<50000; i++) {
-      var oDiv = document.createElement('div');
-      var oText = document.createTextNode("text");
-      oDiv.appendChild(oText);
-      fragment.appendChild(oDiv);
+  // method3: 利用 innerHTML
+    function appendMethod3(){
+      var container = document.getElementById("test");
+      var start = new Date();
+      var arr = [];
+      for(var i=0; i<5000; i++){
+        var str="<div>test</div>";
+        arr.push(str);
+      }
+      container.innerHTML = arr.join("");
+      console.log(new Date() - start);
     }
-    container.appendChild(fragment);
-    console.log(new Date - staDate);
-  }
-  appendMethod1();
-  appendMethod2();
-  appendMethod3();
+  // 结果
+  appendMethod1(); // IE: 105ms chrome: 23ms
+  appendMethod2(); // IE: 101ms chrome: 18ms
+  appendMethod3(); // IE: 33ms  chrome: 12ms
 ```
