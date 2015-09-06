@@ -91,4 +91,72 @@
 ## 专有扩展
 
 #第十二章 DOM2 和 DOM3
+## 12.1 DOM变化
+
+### 针对 XML 命名空间的变化
+
+#### Node 类型的变化
+##### DOM2
+* Node.localName
+* Node.namespaceURI
+* Node.prefix
+##### DOM3
+* Node.isDefaultNamespace()
+* Node.lookupNamespaceURI()
+* Node.lookupPrefix()
+
+#### Document 类型的变化
+##### DOM2
+* Document.createElementNS()
+* Document.createAttributeNS()
+* Document.getElementsByTagNameNS()
+
+#### Element 类型的变化
+##### DOM2
+* Element.getElementsByTagNameNS()
+* Element.getAttributeNS()
+* Element.getAttributeNodeNS()
+* Element.setAttributeNS()
+* Element.setAttributeNodeNS()
+* Element.hasAttributeNS()
+* Element.removeAttributeNS()
+
+### 其他方面变化
+* Node.isSupported() 功能与 document.implementation.hasFeature() 相同
+* Node.isSameNode()
+* Node.isEqualNode()
+* Document.defaultView
+* Document.doctype.publicId
+* Document.doctype.systemId
+* Document.implementation.createDocumentType()
+* Document.implementation.createDocument()
+* Document.implementation.createHTMLDocument(title)
+* Document.importNode(oldNode, boolean)
+
+## 12.2 样式
+
+### 访问元素的样式
+* Element.style
+
+### 操作元素的样式
+* Document.styleSheets
+* Document.getElementsByTagName('link')[0].sheet
+* Document.getElementsByTagName('style')[0].sheet
+
+### 元素的大小
+#### 偏移量
+* Element.offsetHeight
+* Element.offsetWidth
+* Element.offsetTop
+* Element.offsetLeft
+* Element.offsetParent
+#### 客户区大小
+* Element.clientHeight
+* Element.clientLeft
+* Element.clientTop
+* Element.clientWidth
+
+## 12.3 遍历
+
+## 12.4 范围
 
