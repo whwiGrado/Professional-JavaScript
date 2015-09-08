@@ -254,5 +254,48 @@
   对于内联元素来说，
 ```
 ## 12.3 遍历
+* Document.createNodeIterator() (IE9+)
+* Document.createTreeWalker() (IE9+)
+
+```
+  这两个方法都是用来：基于给定的起点对 DOM 结构执行深度优先的遍历操作
+
+  TreeWalker类型 是 NodeIterator类型 的一个更高级版本，使用 TreeWalker类型 会更加灵活
+    创建TreeWalker类型的一个实例的方法：
+    Document.createTreeWalker(root, whatToShow, filter, false) 有四个参数：
+
+    - root: 遍历的起始节点
+
+    - whatToShow: 要遍历的节点类型
+      常用的值有: NodeFilter.SHOW_ALL、NodeFilter.SHOW_ELEMENT、NodeFilter.SHOW_TEXT
+      如果需要多种类型，可以用按位或(|)符号在表示
+        var whatToShow = NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT;
+
+    - filter: 一个 NodeFilter 对象 / 一个筛选特定节点的函数
+      NodeFilter 对象，必须包含一个 acceptNode() 方法:
+        var filter = {
+          acceptNode: function(node){
+            return node.tagName.toLowerCase() === "p" ? // 只遍历 <p> 元素
+                   NodeFilter.FILTER_ACCEPT :
+                   NodeFilter.FILTER_SKIP
+          }
+        };
+      筛选特定节点的函数
+        var filter = function(node){
+          return node.tagName.toLowerCase() === "p" ? // 只遍历 <p> 元素
+                 NodeFilter.FILTER_ACCEPT :
+                 NodeFilter.FILTER_REJECT
+        }
+      其中：
+        NodeFilter.FILTER_SKIP 如果筛选条件不满足，只会跳过当前节点继续前进到子树的下一个节点
+        NodeFilter.FILTER_REJECT 如果筛选条件不满足，会跳过当前节点以及当前节点所在的整个子树
+
+    - entityReferenceExpansion: 在 HTML 中始终为 false
+
+  TreeWalker类型实例所拥有的方法
+    在每个TreeWalker类型实例都有一个内部指针 currentNode ，指向当前遍历的节点
+    当调用 nextNode()、previousNode()、parentNode()、firstChild()、lastChild()、nextSibling()、previousSibling() 这 7 个实例的方法时，就是修改 currentNode 的指向
+```
 ## 12.4 范围
+
 
