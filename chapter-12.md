@@ -45,6 +45,7 @@
 * Node.isSupported() 功能与 document.implementation.hasFeature() 相同
 * Node.isSameNode()
 * Node.isEqualNode()
+
 * Document.defaultView
 
 ```
@@ -206,13 +207,52 @@
 
 #### 客户区大小
 * Element.clientHeight
-* Element.clientLeft
-* Element.clientTop
 * Element.clientWidth
 
 ```
+  确定浏览器视口的大小，可以使用 document.documentElement 或 document.body（< IE7）的 clientHeight 和 clientWidth 属性
+    function getViewport(){
+      if(document.compatMode === "BackCompat"){
+        return {
+          width: document.body.clientWidth,
+          height: document.body.clientHeight
+        };
+      } else {
+        return {
+          width: document.documentElement.clientWidth,
+          height: document.documentElement.clientHeight
+        };
+      }
+    }
+```
+#### 滚动大小
+* Element.scrollHeight
+* Element.scrollWidth
+* Element.scrollTop
+* Element.scrollLeft
 
 ```
+  上述四个属性的返回值均为 Number 类型
+  scrollHeight（只读）返回元素内容的总高度
+  scrollWidth （只读）返回元素内容的总宽度
+  scrollTop   （读/写）返回因为纵向滚动而被隐藏在内容区上方的像素数
+  scrollLeft  （读/写）返回因为横向滚动而被隐藏在内容区左侧的像素数
+  可以通过给 scrollTop、scrollLeft 两个属性赋值，使得元素滚动的设定的位置
+```
+#### 元素位置
+* Element.getClientRect()
+* Element.getBoundingClientRect()
 
+```
+  Element.getClientRects 返回一个 ClientRectList 对象，其中包含一个或多个 ClientRect 对象
+  Element.getBoundingClientRect() 返回一个 ClientRect 对象
+    ClientRect 对象有四个属性：left、top、right、bottom，分别代表元素相对与浏览器视口的位置
+    注意：<=IE8 时，浏览器视口的左上角的坐标是(2,2)，IE9 之后修正为(0,0)
+
+  对于块级元素来说：两者并没有区别
+    Element.getClientRect()[0] === Element.getBoundingClientRect() // true
+  对于内联元素来说，
+```
 ## 12.3 遍历
 ## 12.4 范围
+
