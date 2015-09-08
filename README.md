@@ -155,8 +155,18 @@
 * Element.clientLeft
 * Element.clientTop
 * Element.clientWidth
+#### 滚动大小
+* Element.scrollHeight
+* Element.scrollWidth
+* Element.scrollTop
+* Element.scrollLeft
+#### 元素位置
+* Element.getClientRect()
+* Element.getBoundingClientRect()
 
 ## 12.3 遍历
+* Document.createNodeIterator() (IE9+)
+* Document.createTreeWalker() (IE9+)
 
 ## 12.4 范围
 
