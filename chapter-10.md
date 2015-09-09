@@ -292,6 +292,7 @@
 * document.close()
 * document.write()
 * document.writeln()
+
 ### Element 类型
 ```
   Element 继承自 Node 类型的属性：
