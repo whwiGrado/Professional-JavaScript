@@ -31,11 +31,13 @@
 * unload 事件
 * resize 事件
 * scroll 事件
+
 ### 焦点事件
 * blur 事件
 * focus 事件
 * focusin 事件
 * focusout 事件
+
 ### 鼠标与滚轮事件
 * click 事件
 * mousedown 事件
@@ -46,4 +48,5 @@
 * dblclick 事件
 * mouseenter 事件
 * mouseleave 事件
+
 ### 键盘与文本事件
